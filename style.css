@@ -1,0 +1,500 @@
+/* ================================================================
+BLEACH MUSIC PLAYER — style.css
+
+   ================================================================ */
+
+:root {
+    --bg: #06080c;
+    --surface: #0b0f16;
+    --card: #11151d;
+    --border: rgba(255, 255, 255, 0.06);
+    --accent: #c8a96e;      /* Dorado Zanpakutō */
+    --accent2: #5e9bcc;     /* Azul Reiatsu */
+    --red: #ff3e3e;         /* Rojo Hollow */
+    --text: #e8e4dc;
+    --muted: #626975;
+    --glow: rgba(200, 169, 110, 0.3);
+}
+
+/* Ocultar inputs lógicos estructurales */
+input[type="radio" ], input[type="radio"], input[type="checkbox"] {
+    display: none;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+}
+
+/* Fondo Atmosférico */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 60% 40% at 15% 20%, rgba(94, 155, 204, 0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 85% 80%, rgba(176, 48, 48, 0.05) 0%, transparent 60%);
+    z-index: 0;
+}
+
+/* Layout */
+.app {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 24px;
+    width: min(1000px, 95vw);
+    padding: 20px 0;
+}
+
+.panel {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+/* PLAYER PANEL LEFT */
+.player {
+    display: flex;
+    flex-direction: column;
+}
+
+.player-header {
+    background: linear-gradient(135deg, #070a10 0%, #11151e 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.soul-icon { width: 36px; height: 36px; }
+
+.brand-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    font-weight: 900;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    text-transform: uppercase;
+}
+
+.brand-sub {
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: var(--muted);
+    text-transform: uppercase;
+}
+
+/* Área de Carátulas Dinámicas */
+.artwork-area {
+    padding: 24px 24px 0;
+    display: flex;
+    gap: 24px;
+}
+
+.artwork-frame {
+    position: relative;
+}
+
+.artwork-frame::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--accent), transparent, var(--accent2));
+}
+
+.artwork {
+    position: relative;
+    z-index: 1;
+    width: 150px;
+    height: 150px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--surface);
+}
+
+.cover-img {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    background: var(--surface);
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: scale(0.9);
+}
+
+/* Asegura que las imágenes de portada se ajusten al área de artwork (150x150) */
+.cover-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Bloque de títulos dinámicos */
+.song-info {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.now-playing-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.now-playing-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+}
+
+.dynamic-titles {
+    position: relative;
+    height: 75px;
+}
+
+.title-block {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.song-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.song-artist {
+    font-size: 0.85rem;
+    color: var(--accent2);
+    margin-top: 2px;
+}
+
+.song-album {
+    font-size: 0.7rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 2px;
+}
+
+/* Animaciones del Ecualizador */
+.reiatsu-bars {
+    display: flex;
+    gap: 3px;
+    align-items: flex-end;
+    height: 20px;
+    margin-top: 10px;
+}
+
+.reiatsu-bar {
+    width: 3px;
+    height: 20%;
+    background: var(--accent2);
+    border-radius: 1px;
+}
+
+@keyframes dance {
+    0% { height: 20%; }
+    100% { height: 100%; }
+}
+
+/* Buscador Lateral */
+.search-box {
+    padding: 16px;
+    border-bottom: 1px solid var(--border);
+}
+
+.search-input {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 10px 14px;
+    border-radius: 8px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.8rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.search-input:focus {
+    border-color: var(--accent);
+}
+
+/* Controles Deslizantes nativos (PROGRESO Y VOLUMEN) */
+.progress-area { padding: 20px 24px 0; }
+
+.progress-bar, .vol-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 5px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    outline: none;
+    cursor: pointer;
+}
+
+.progress-bar::-webkit-slider-thumb, .vol-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: grab;
+}
+
+.progress-times {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.65rem;
+    color: var(--muted);
+    margin-top: 6px;
+}
+
+.volume-area {
+    padding: 0 24px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: auto;
+}
+
+.vol-icon { color: var(--muted); }
+
+/* Controles de Reproducción */
+.controls {
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.ctrl-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+
+.ctrl-btn:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 10px var(--glow);
+    color: var(--accent);
+}
+
+.ctrl-btn.play {
+    width: 52px;
+    height: 52px;
+    background: var(--accent);
+    color: var(--bg);
+}
+
+/* Sistema de saltos ocultos condicionales */
+.skip-container { position: relative; width: 40px; height: 40px; }
+.skip-container .ctrl-btn.skip {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Playlist e ítems */
+.playlist { display: flex; flex-direction: column; }
+.playlist-header {
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+}
+
+.playlist-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+}
+
+.playlist-count { font-size: 0.65rem; color: var(--muted); }
+
+.track-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.track-item:hover { background: rgba(255, 255, 255, 0.02); }
+
+.track-num { width: 20px; font-size: 0.75rem; color: var(--muted); }
+.playing-anim { display: none; gap: 2px; align-items: flex-end; height: 10px; }
+.playing-anim span { width: 2px; height: 100%; background: var(--accent); animation: dance 0.6s ease-in-out infinite alternate; }
+.playing-anim span:nth-child(2) { animation-delay: 0.2s; }
+.playing-anim span:nth-child(3) { animation-delay: 0.4s; }
+
+.track-thumb {
+    width: 36px;
+    height: 36px;
+    background: var(--surface);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Asegura que las imágenes dentro de la miniatura se ajusten al contenedor */
+.track-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 6px;
+}
+
+.track-meta { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+.track-dur { font-size: 0.7rem; color: var(--muted); }
+
+/* Íconos de Favorito Corazón */
+.heart-icon, .player-fav-btn label {
+    cursor: pointer;
+    color: var(--muted);
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+.heart-icon:hover { color: var(--red); }
+
+.player-fav-btn { position: relative; width: 20px; height: 20px; }
+.player-fav-btn label { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+
+.list-divider { height: 1px; background: var(--border); margin: 0 20px; }
+
+/* ════════════════════════════════════════════════════ */
+/*  LOGIC ENGINE IN CSS (El motor lógico sin JS)        */
+/* ════════════════════════════════════════════════════ */
+
+/* Sincronización de canción seleccionada */
+#track-0:checked ~ .app .img-track0,
+#track-1:checked ~ .app .img-track1,
+#track-2:checked ~ .app .img-track2,
+#track-3:checked ~ .app .img-track3,
+#track-4:checked ~ .app .img-track4 { opacity: 1; transform: scale(1); z-index: 2; }
+
+#track-0:checked ~ .app .block-0,
+#track-1:checked ~ .app .block-1,
+#track-2:checked ~ .app .block-2,
+#track-3:checked ~ .app .block-3,
+#track-4:checked ~ .app .block-4 { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+/* Resaltar canción activa en la lista lateral */
+#track-0:checked ~ .app .item-0,
+#track-1:checked ~ .app .item-1,
+#track-2:checked ~ .app .item-2,
+#track-3:checked ~ .app .item-3,
+#track-4:checked ~ .app .item-4 { background: rgba(200, 169, 110, 0.06); border-left: 3px solid var(--accent); }
+
+#track-0:checked ~ .app .item-0 .static-num,
+#track-1:checked ~ .app .item-1 .static-num,
+#track-2:checked ~ .app .item-2 .static-num,
+#track-3:checked ~ .app .item-3 .static-num,
+#track-4:checked ~ .app .item-4 .static-num { display: none; }
+
+#track-0:checked ~ .app .item-0 .playing-anim,
+#track-1:checked ~ .app .item-1 .playing-anim,
+#track-2:checked ~ .app .item-2 .playing-anim,
+#track-3:checked ~ .app .item-3 .playing-anim,
+#track-4:checked ~ .app .item-4 .playing-anim { display: flex; }
+
+#track-0:checked ~ .app .item-0 .reiatsu-bar,
+#track-1:checked ~ .app .item-1 .reiatsu-bar,
+#track-2:checked ~ .app .item-2 .reiatsu-bar,
+#track-3:checked ~ .app .item-3 .reiatsu-bar,
+#track-4:checked ~ .app .item-4 .reiatsu-bar { animation: dance 0.6s ease-in-out infinite alternate; }
+
+/* Asignación dinámica de las barras de ecualización */
+#track-0:checked ~ .app .reiatsu-bar { background: var(--accent); animation: dance 0.5s infinite alternate; }
+#track-1:checked ~ .app .reiatsu-bar { background: #ff9d00; animation: dance 0.4s infinite alternate; }
+#track-2:checked ~ .app .reiatsu-bar { background: #e02424; animation: dance 0.6s infinite alternate; }
+#track-3:checked ~ .app .reiatsu-bar { background: #ffffff; animation: dance 0.3s infinite alternate; }
+#track-4:checked ~ .app .reiatsu-bar { background: #22c55e; animation: dance 0.7s infinite alternate; }
+
+#track-0:checked ~ .app .reiatsu-bar:nth-child(even) { animation-delay: 0.1s; }
+#track-1:checked ~ .app .reiatsu-bar:nth-child(even) { animation-delay: 0.2s; }
+#track-2:checked ~ .app .reiatsu-bar:nth-child(even) { animation-delay: 0.15s; }
+#track-3:checked ~ .app .reiatsu-bar:nth-child(even) { animation-delay: 0.05s; }
+#track-4:checked ~ .app .reiatsu-bar:nth-child(even) { animation-delay: 0.3s; }
+
+/* Ruteo de botones Siguiente y Anterior (Labels Condicionales) */
+#track-0:checked ~ .app .prev-to-0, #track-0:checked ~ .app .next-to-1 { opacity: 1; pointer-events: auto; }
+#track-1:checked ~ .app .prev-to-1, #track-1:checked ~ .app .next-to-2 { opacity: 1; pointer-events: auto; }
+#track-2:checked ~ .app .prev-to-2, #track-2:checked ~ .app .next-to-3 { opacity: 1; pointer-events: auto; }
+#track-3:checked ~ .app .prev-to-3, #track-3:checked ~ .app .next-to-4 { opacity: 1; pointer-events: auto; }
+#track-4:checked ~ .app .prev-to-4, #track-4:checked ~ .app .next-to-0 { opacity: 1; pointer-events: auto; }
+
+/* Sistema de Favoritos Enlazado */
+#fav-0:checked ~ .app .item-0 .heart-icon, #fav-0:checked ~ .app .lbl-fav-0 { color: var(--red); text-shadow: 0 0 8px rgba(255,62,62,0.4); }
+#fav-1:checked ~ .app .item-1 .heart-icon, #fav-1:checked ~ .app .lbl-fav-1 { color: var(--red); text-shadow: 0 0 8px rgba(255,62,62,0.4); }
+#fav-2:checked ~ .app .item-2 .heart-icon, #fav-2:checked ~ .app .lbl-fav-2 { color: var(--red); text-shadow: 0 0 8px rgba(255,62,62,0.4); }
+#fav-3:checked ~ .app .item-3 .heart-icon, #fav-3:checked ~ .app .lbl-fav-3 { color: var(--red); text-shadow: 0 0 8px rgba(255,62,62,0.4); }
+#fav-4:checked ~ .app .item-4 .heart-icon, #fav-4:checked ~ .app .lbl-fav-4 { color: var(--red); text-shadow: 0 0 8px rgba(255,62,62,0.4); }
+
+#track-0:checked ~ .app .lbl-fav-0,
+#track-1:checked ~ .app .lbl-fav-1,
+#track-2:checked ~ .app .lbl-fav-2,
+#track-3:checked ~ .app .lbl-fav-3,
+#track-4:checked ~ .app .lbl-fav-4 { opacity: 1; pointer-events: auto; }
+
+
+
+.proposal-text { font-size: 0.8rem; color: #9aa3b0; line-height: 1.6; }
+.proposal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px; }
+.proposal-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+.proposal-card-title { font-size: 0.7rem; text-transform: uppercase; color: var(--accent2); margin-bottom: 6px; }
+.proposal-card p { font-size: 0.75rem; color: var(--muted); line-height: 1.5; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .app { grid-template-columns: 1fr; }
+    .proposal-grid { grid-template-columns: 1fr; }
+    .artwork-area { flex-direction: column; align-items: center; text-align: center; }
+    .reiatsu-bars { justify-content: center; }
+}

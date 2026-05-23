@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bleach Music Player - Soul Society Archives</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <!-- ─── TRUCO CSS: Inputs Radio para cambiar de canción sin JS ─── -->
+    <input type="radio" name="current-track" id="track-0" checked>
+    <input type="radio" name="current-track" id="track-1">
+    <input type="radio" name="current-track" id="track-2">
+    <input type="radio" name="current-track" id="track-3">
+    <input type="radio" name="current-track" id="track-4">
+
+    <!-- ─── TRUCO CSS: Checkboxes para Sistema de Favoritos independiente ─── -->
+    <input type="checkbox" id="fav-0">
+    <input type="checkbox" id="fav-1">
+    <input type="checkbox" id="fav-2">
+    <input type="checkbox" id="fav-3">
+    <input type="checkbox" id="fav-4">
+
+    <div class="app">
+
+        <!-- ══════════════ LEFT: PLAYER PANEL ══════════════ -->
+        <div class="panel player">
+
+            <!-- Header -->
+            <div class="player-header">
+                <svg class="soul-icon" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="19" cy="19" r="18" stroke="#c8a96e" stroke-width="1.2" stroke-dasharray="4 2" />
+                    <path d="M19 6 L20.5 18 L19 32 L17.5 18 Z" fill="#c8a96e" opacity="0.9" />
+                    <path d="M8 16 L17 18 L8 22 Z" fill="#5e9bcc" opacity="0.7" />
+                    <path d="M30 16 L21 18 L30 22 Z" fill="#5e9bcc" opacity="0.7" />
+                    <circle cx="19" cy="18.5" r="2.5" fill="#c8a96e" />
+                </svg>
+                <div>
+                    <div class="brand-title">Bleach OST</div>
+                    <div class="brand-sub">Soul Society Archives</div>
+                </div>
+            </div>
+
+            <!-- Artwork + Info Dinámica mediante CSS -->
+            <div class="artwork-area">
+                <div class="artwork-frame">
+                    <div class="artwork">
+                        <!-- Las imágenes cambian mediante CSS según el radio seleccionado -->
+                        <div class="cover-img img-track0"><img src="/assets/img/hq720.jpg" /></div>
+                        <div class="cover-img img-track1"><img src="/assets/img/maxresdefault.jpg" /></div>
+                        <div class="cover-img img-track2"><img src="/assets/img/artworks-000097213254-3y2en8-t500x500.jpg" /></div>
+                        <div class="cover-img img-track3"><img src="/assets/img/images.jpg" /></div>
+                        <div class="cover-img img-track4"><img src="/assets/img/ab67616d0000b273ee553f2ddd922dd2102c2c0e.jpg" /></div>
+                    </div>
+                </div>
+
+                <div class="song-info">
+                    <div class="now-playing-header">
+                        <span class="now-playing-label">Reproduciendo</span>
+                        <!-- Botón de favoritos del reproductor principal -->
+                        <div class="player-fav-btn">
+                            <label for="fav-0" class="lbl-fav-0">❤</label>
+                            <label for="fav-1" class="lbl-fav-1">❤</label>
+                            <label for="fav-2" class="lbl-fav-2">❤</label>
+                            <label for="fav-3" class="lbl-fav-3">❤</label>
+                            <label for="fav-4" class="lbl-fav-4">❤</label>
+                        </div>
+                    </div>
+                    
+                    <!-- Títulos cambiantes por CSS -->
+                    <div class="dynamic-titles">
+                        <div class="title-block block-0">
+                            <div class="song-title">Number One</div>
+                            <div class="song-artist">Hazel Fernandes</div>
+                            <div class="song-album">Bleach OST Vol. 1 — 2004</div>
+                        </div>
+                        <div class="title-block block-1">
+                            <div class="song-title">Asterisk</div>
+                            <div class="song-artist">Orange Range</div>
+                            <div class="song-album">Bleach Opening 1</div>
+                        </div>
+                        <div class="title-block block-2">
+                            <div class="song-title">Ichirin No Hana</div>
+                            <div class="song-artist">HIGH and MIGHTY COLOR</div>
+                            <div class="song-album">Bleach Opening 3</div>
+                        </div>
+                        <div class="title-block block-3">
+                            <div class="song-title">On The Precipice Of Defeat</div>
+                            <div class="song-artist">Shiro Sagisu</div>
+                            <div class="song-album">Bleach OST Vol. 1</div>
+                        </div>
+                        <div class="title-block block-4">
+                            <div class="song-title">Invasion</div>
+                            <div class="song-artist">Shiro Sagisu</div>
+                            <div class="song-album">Bleach OST Vol. 2</div>
+                        </div>
+                    </div>
+
+                    <div class="reiatsu-bars">
+                        <div class="reiatsu-bar"></div><div class="reiatsu-bar"></div>
+                        <div class="reiatsu-bar"></div><div class="reiatsu-bar"></div>
+                        <div class="reiatsu-bar"></div><div class="reiatsu-bar"></div>
+                        <div class="reiatsu-bar"></div><div class="reiatsu-bar"></div>
+                        <div class="reiatsu-bar"></div><div class="reiatsu-bar"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Barra de progreso (Arrastrable de forma nativa) -->
+            <div class="progress-area">
+                <input type="range" id="progress-bar" class="progress-bar" min="0" max="100" value="35" />
+                <div class="progress-times">
+                    <span id="time-current">1:18</span>
+                    <span id="time-total">3:40</span>
+                </div>
+            </div>
+
+            <!-- Controles (Simulados para el diseño) -->
+            <div class="controls">
+                <button class="ctrl-btn secondary" title="Aleatorio">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8" /><line x1="4" y1="20" x2="21" y2="3" /><polyline points="21 16 21 21 16 21" /><line x1="15" y1="15" x2="21" y2="21" /></svg>
+                </button>
+
+                <!-- Flechas de navegación controladas mediante labels de CSS -->
+                <div class="skip-container">
+                    <label for="track-4" class="ctrl-btn skip prev-to-0">⏮</label>
+                    <label for="track-0" class="ctrl-btn skip prev-to-1">⏮</label>
+                    <label for="track-1" class="ctrl-btn skip prev-to-2">⏮</label>
+                    <label for="track-2" class="ctrl-btn skip prev-to-3">⏮</label>
+                    <label for="track-3" class="ctrl-btn skip prev-to-4">⏮</label>
+                </div>
+
+                <button class="ctrl-btn play" title="Reproducir/Pausar">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1" /><rect x="14" y="4" width="4" height="16" rx="1" /></svg>
+                </button>
+
+                <div class="skip-container">
+                    <label for="track-1" class="ctrl-btn skip next-to-0">⏭</label>
+                    <label for="track-2" class="ctrl-btn skip next-to-1">⏭</label>
+                    <label for="track-3" class="ctrl-btn skip next-to-2">⏭</label>
+                    <label for="track-4" class="ctrl-btn skip next-to-3">⏭</label>
+                    <label for="track-0" class="ctrl-btn skip next-to-4">⏭</label>
+                </div>
+
+                <button class="ctrl-btn secondary" title="Repetir">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9" /><path d="M3 11V9a4 4 0 014-4h14" /><polyline points="7 23 3 19 7 15" /><path d="M21 13v2a4 4 0 01-4 4H3" /></svg>
+                </button>
+            </div>
+
+            <!-- Barra de volumen (Arrastrable de forma nativa) -->
+            <div class="volume-area">
+                <svg class="vol-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z" /></svg>
+                <input type="range" id="vol-slider" class="vol-slider" min="0" max="100" value="75" />
+                <svg class="vol-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" /></svg>
+            </div>
+
+        </div>
+
+
+        <!-- ══════════════ RIGHT: PLAYLIST & SEARCH ══════════════ -->
+        <div class="panel playlist">
+
+            <!-- Buscador (Filtros visuales mediante CSS de sugerencia) -->
+            <div class="search-box">
+                <input type="text" placeholder="🔍 Buscar en Soul Society..." class="search-input" />
+            </div>
+
+            <div class="playlist-header">
+                <div class="playlist-title">Lista de canciones</div>
+                <div class="playlist-count">5 pistas</div>
+            </div>
+
+            <div class="playlist-list">
+
+                <!-- Track 1 -->
+                <label for="track-0" class="track-item item-0">
+                    <div class="track-num">
+                        <span class="static-num">1</span>
+                        <div class="playing-anim"><span></span><span></span><span></span></div>
+                    </div>
+                    <div class="track-thumb"><img src="/assets/img/hq720.jpg" alt="Track Thumbnail" /></div>
+                    <div class="track-info">
+                        <div class="track-name">Number One</div>
+                        <div class="track-artist">Hazel Fernandes</div>
+                    </div>
+                    <div class="track-meta">
+                        <label for="fav-0" class="heart-icon">❤</label>
+                        <div class="track-dur">3:38</div>
+                    </div>
+                </label>
+
+                <div class="list-divider"></div>
+
+                <!-- Track 2 -->
+                <label for="track-1" class="track-item item-1">
+                    <div class="track-num">
+                        <span class="static-num">2</span>
+                        <div class="playing-anim"><span></span><span></span><span></span></div>
+                    </div>
+                    <div class="track-thumb"><img src="/assets/img/maxresdefault.jpg" /></div>
+                    <div class="track-info">
+                        <div class="track-name">Asterisk</div>
+                        <div class="track-artist">Orange Range</div>
+                    </div>
+                    <div class="track-meta">
+                        <label for="fav-1" class="heart-icon">❤</label>
+                        <div class="track-dur">3:57</div>
+                    </div>
+                </label>
+
+                <div class="list-divider"></div>
+
+                <!-- Track 3 -->
+                <label for="track-2" class="track-item item-2">
+                    <div class="track-num">
+                        <span class="static-num">3</span>
+                        <div class="playing-anim"><span></span><span></span><span></span></div>
+                    </div>
+                    <div class="track-thumb"><img src="/assets/img/artworks-000097213254-3y2en8-t500x500.jpg" /></div>
+                    <div class="track-info">
+                        <div class="track-name">Ichirin No Hana</div>
+                        <div class="track-artist">HIGH and MIGHTY COLOR</div>
+                    </div>
+                    <div class="track-meta">
+                        <label for="fav-2" class="heart-icon">❤</label>
+                        <div class="track-dur">4:08</div>
+                    </div>
+                </label>
+
+                <div class="list-divider"></div>
+
+                <!-- Track 4 -->
+                <label for="track-3" class="track-item item-3">
+                    <div class="track-num">
+                        <span class="static-num">4</span>
+                        <div class="playing-anim"><span></span><span></span><span></span></div>
+                    </div>
+                    <div class="track-thumb"><img src="/assets/img/images.jpg" /></div>
+                    <div class="track-info">
+                        <div class="track-name">Velonica by Aqua</div>
+                        <div class="track-artist">Shiro Sagisu</div>
+                    </div>
+                    <div class="track-meta">
+                        <label for="fav-3" class="heart-icon">❤</label>
+                        <div class="track-dur">2:15</div>
+                    </div>
+                </label>
+
+                <div class="list-divider"></div>
+
+                <!-- Track 5 -->
+                <label for="track-4" class="track-item item-4">
+                    <div class="track-num">
+                        <span class="static-num">5</span>
+                        <div class="playing-anim"><span></span><span></span><span></span></div>
+                    </div>
+                    <div class="track-thumb"><img src="/assets/img/ab67616d0000b273ee553f2ddd922dd2102c2c0e.jpg" /></div>
+                    <div class="track-info">
+                        <div class="track-name">Invasion</div>
+                        <div class="track-artist">Shiro Sagisu</div>
+                    </div>
+                    <div class="track-meta">
+                        <label for="fav-4" class="heart-icon">❤</label>
+                        <div class="track-dur">3:02</div>
+                    </div>
+                </label>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
